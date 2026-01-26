@@ -13,7 +13,6 @@ public class CrashDetector : MonoBehaviour
         if (collision.gameObject.layer == layerIndex)
     {
         crashParticles.Play();
-        GetComponentInChildren<SpriteRenderer>().enabled = false;
         Invoke("ReloadScene", restartDelay);
         //SceneManager.LoadScene(0);
     }
