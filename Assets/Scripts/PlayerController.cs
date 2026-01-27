@@ -9,9 +9,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float boostSpeed = 36.45f;
 
     InputAction moveAction;
-    Rigidbody2D myRigidBody2D;
+    public Rigidbody2D myRigidBody2D;
     SurfaceEffector2D surfaceEffector2D;
     Vector2 moveVector;
+    public bool canControlPlayer = true;
+
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
@@ -21,8 +23,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(canControlPlayer)
+        {
         RotatePlayer();
-        BoostPlayer();
+        BoostPlayer();   
+        }
     }
 
     void RotatePlayer()

@@ -1,10 +1,17 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class CrashDetector : MonoBehaviour
 {
     [SerializeField] float restartDelay = 1f;
     [SerializeField] ParticleSystem crashParticles;
+    PlayerController playerController;
+
+    void Start()
+    {
+        playerController = FindFirstObjectByType<PlayerController>();
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,6 +21,8 @@ public class CrashDetector : MonoBehaviour
     {
         crashParticles.Play();
         Invoke("ReloadScene", restartDelay);
+        // playerController.canControlPlayer = false;
+        Destroy(playerController.myRigidBody2D);
         //SceneManager.LoadScene(0);
     }
     }
