@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         myRigidBody2D = GetComponent<Rigidbody2D>();
-        surfaceEffector2D = FindAnyObjectByType<SurfaceEffector2D>();
+        surfaceEffector2D = FindFirstObjectByType<SurfaceEffector2D>();
     }
 
     void Update()
