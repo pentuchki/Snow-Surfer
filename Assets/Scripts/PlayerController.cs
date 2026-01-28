@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     InputAction moveAction;
     public Rigidbody2D myRigidBody2D;
     SurfaceEffector2D surfaceEffector2D;
-    Vector2 moveVector;
+    public Vector2 moveVector;
     public bool canControlPlayer = true;
 
     void Start()
