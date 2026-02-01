@@ -22,7 +22,7 @@ public class CrashDetector : MonoBehaviour
         Invoke("ReloadScene", restartDelay);
         Destroy(playerController.myRigidBody2D);
         //SceneManager.LoadScene(0);
-        playerController.canControlPlayer = false;
+        playerController.DisableControls();
     }
     }
     void ReloadScene()

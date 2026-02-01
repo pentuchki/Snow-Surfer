@@ -11,14 +11,19 @@ public class PlayerController : MonoBehaviour
     InputAction moveAction;
     public Rigidbody2D myRigidBody2D;
     SurfaceEffector2D surfaceEffector2D;
+    ScoreManager scoreManager;
+
     public Vector2 moveVector;
-    public bool canControlPlayer = true;
+    bool canControlPlayer = true;
+    float previousRotation;
+    float totalRotation;
 
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         myRigidBody2D = GetComponent<Rigidbody2D>();
         surfaceEffector2D = FindFirstObjectByType<SurfaceEffector2D>();
+        scoreManager = FindFirstObjectByType<ScoreManager>();
     }
 
     void Update()
@@ -27,6 +32,7 @@ public class PlayerController : MonoBehaviour
         {
         RotatePlayer();
         BoostPlayer();   
+        CalculateFlips();
         }
     }
 
@@ -53,5 +59,25 @@ public class PlayerController : MonoBehaviour
         {
             surfaceEffector2D.speed = baseSpeed;
         }
+    }
+
+    void CalculateFlips()
+    {
+        float currentRotation = transform.rotation.eulerAngles.z;
+
+        totalRotation += Mathf.DeltaAngle(previousRotation, currentRotation);
+        
+        if (totalRotation > 340 || totalRotation < -340)
+        {
+            totalRotation = 0;
+            scoreManager.AddScore(100);
+        }
+
+        previousRotation = currentRotation;
+    }
+
+    public void DisableControls()
+    {
+        canControlPlayer = false;
     }
 }
